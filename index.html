@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page_title">Health For All Community Development Org / HACDO</title>
+    <link rel="icon" href="./img/logo.png">
+    <link rel="stylesheet" href="./tailwind.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@25/build/css/intlTelInput.css">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+Ethiopic:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Noto Sans Ethiopic', 'Inter', sans-serif;
+            background-color: #F8F9FA;
+            color: #212529;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #1E8E42;
+            border-radius: 8px;
+        }
+
+        .feature-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .feature-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 24px -10px rgba(30, 142, 66, 0.25);
+        }
+
+        .iti {
+            width: 100%;
+        }
+
+        @media (max-width: 767px) {
+            #navMenu.hidden {
+                display: none !important;
+            }
+
+            #navMenu:not(.hidden) {
+                display: flex !important;
+                gap: 0.25rem;
+            }
+
+            #navMenu a {
+                width: 100%;
+                padding: 0.75rem 1rem;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .mobile-join-label {
+                display: none;
+            }
+
+            #langToggleBtn #currentLangLabel {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between antialiased">
+
+    <!-- Header -->
+    <header class="bg-white sticky top-0 z-50 shadow-sm border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-2">
+            <!-- Logo HACDO with Image -->
+            <a href="#" class="flex items-fitend space-x-3">
+                <div class="flex flex-col items-start">
+                    <!-- Text HACDO -->
+                    
+                    
+                    <!-- Logo Image -->
+                    <div class="flex items-center space-x-2">
+                        <img src="./img/logo.png" alt="HACDO Logo" class="h-9 sm:h-12 object-contain">
+                        <span class="flex flex-col text-[9px] sm:text-[11px] font-medium text-hacdo-blue leading-tight tracking-wide border-l border-gray-200 pl-2">
+                            <span class="text-xl sm:text-3xl font-black tracking-tight text-hacdo-green leading-none">HACDO</span>
+                            <span class="hidden sm:block" data-i18n="brand_org_name">Health For All Community Development Organization</span>
+                        </span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Language Switcher & Actions -->
+            <div class="flex items-center gap-1 sm:gap-4">
+                <!-- Trilingual Switcher -->
+                <div class="relative inline-block text-left">
+                    <button id="langToggleBtn" onclick="toggleLanguageDropdown()" aria-label="Change language" data-i18n-aria-label="aria_language" class="bg-gray-100 hover:bg-gray-200 text-gray-800 text-xs font-bold px-2 sm:px-3 py-2 rounded-lg border border-gray-200 flex items-center gap-1.5 transition">
+                        <i class="fa-solid fa-globe text-hacdo-green"></i>
+                        <span id="currentLangLabel">English</span>
+                        <i class="fa-solid fa-chevron-down text-[10px]"></i>
+                    </button>
+                    
+                    <div id="langDropdown" class="hidden absolute right-0 mt-2 w-40 bg-white rounded-xl shadow-xl border border-gray-100 py-1 z-50">
+                        <button onclick="setLanguage('am')" class="w-full text-left px-4 py-2 text-xs font-semibold hover:bg-hacdo-lightgreen hover:text-hacdo-green flex items-center justify-between">
+                            <span>አማርኛ</span>
+                            <span class="text-[10px] text-gray-400">AM</span>
+                        </button>
+                        <button onclick="setLanguage('om')" class="w-full text-left px-4 py-2 text-xs font-semibold hover:bg-hacdo-lightgreen hover:text-hacdo-green flex items-center justify-between border-t border-gray-50">
+                            <span>Affan Oromo</span>
+                            <span class="text-[10px] text-gray-400">OM</span>
+                        </button>
+                        <button onclick="setLanguage('en')" class="w-full text-left px-4 py-2 text-xs font-semibold hover:bg-hacdo-lightgreen hover:text-hacdo-green flex items-center justify-between border-t border-gray-50">
+                            <span>English</span>
+                            <span class="text-[10px] text-gray-400">EN</span>
+                        </button>
+                    </div>
+                </div>
+
+                <button onclick="openModal('joinModal')" aria-label="Join now" data-i18n-aria-label="aria_join" class="bg-hacdo-green hover:bg-emerald-700 text-white text-xs sm:text-sm font-semibold px-3 sm:px-5 py-2.5 rounded-lg transition duration-200 shadow-md flex items-center gap-2">
+                    <i class="fa-solid fa-user-plus text-xs"></i>
+                    <span class="mobile-join-label sm:hidden" data-i18n="nav_join_short">Join</span>
+                    <span class="hidden sm:inline" data-i18n="nav_join">አሁኑኑ ይቀላቀሉ</span>
+                </button>
+
+                <button id="mobileMenuBtn" type="button" aria-label="Toggle navigation" data-i18n-aria-label="aria_menu" aria-controls="navMenu" aria-expanded="false" class="md:hidden text-gray-700 hover:text-hacdo-green p-2 rounded-lg border border-gray-200 bg-gray-100 flex items-center gap-2">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                    <span class="text-xs font-semibold" data-i18n="nav_menu">Menu</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Navigation Bar -->
+        <nav class="bg-hacdo-blue text-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div id="navMenu" class="hidden flex-col md:flex md:flex-row md:items-center md:space-x-1 lg:space-x-6 py-2.5 text-xs lg:text-sm font-semibold">
+                    <a href="#home" class="px-3 py-2 md:py-1.5 rounded-md bg-white/20 hover:bg-white/30 transition" data-i18n="nav_home">መነሻ</a>
+                    <a href="#features" class="px-3 py-2 md:py-1.5 rounded-md hover:bg-white/10 transition" data-i18n="nav_resources">ምንጮች</a>
+                    <a href="./stories.html" class="px-3 py-2 md:py-1.5 rounded-md hover:bg-white/10 transition" data-i18n="nav_stories">እለታዊ የ HACDO ዜና</a>
+                    <a href="./galleryint.html" class="px-3 py-2 md:py-1.5 rounded-md hover:bg-white/10 transition" data-i18n="nav_gallery">ጋለሪ</a>
+                    <a href="#community" class="px-3 py-2 md:py-1.5 rounded-md hover:bg-white/10 transition" data-i18n="nav_community">የወጣቶች መድረክ</a>
+                </div>
+            </div>        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative bg-gray-900 text-white overflow-hidden min-h-[380px] sm:min-h-[420px] flex items-center">
+        <div class="absolute inset-0 z-0">
+            <img src="./img/collage.png" alt="Health For All" class="w-full h-full object-cover filter brightness-75">
+            <div class="absolute inset-0 bg-gradient-to-r from-gray-950/90 via-gray-900/60 to-transparent"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 w-full">
+            <div class="max-w-2xl">
+                <span class="inline-block bg-hacdo-green text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-4" data-i18n="hero_badge">
+                    Health For All መድረክ
+                </span>
+                <h1 class="text-3xl sm:text-5xl font-black tracking-tight leading-tight uppercase text-white drop-shadow-sm mb-4">
+                    <span data-i18n="hero_title1">ጤና ለሁሉም:</span><br>
+                    <span class="text-hacdo-green" data-i18n="hero_title2">ማህበረሰብን ማብቃት እና ህይወታቸውን መቀየር</span> <span data-i18n="hero_title3">መገንባት</span>
+                </h1>
+                <p class="text-base sm:text-lg font-medium text-gray-200 mb-8 max-w-xl leading-relaxed" data-i18n="hero_subtitle">
+                    ለወጣቶች፣ ለሕፃናት፣ ለአካል ጉዳተኞች እና ለሁሉም የኅብረተሰብ ክፍሎች እኩል ዕድልና ብሩህ ተስፋ ለመፍጠር አብረን እንሰራለን።
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#features" class="bg-hacdo-green hover:bg-emerald-700 text-white font-bold px-6 py-3.5 rounded-xl transition shadow-lg flex items-center gap-2 text-sm">
+                        <span data-i18n="hero_cta1">ዛሬ ይጀምሩ</span>
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 sm:-mt-10 relative z-20 mb-12 sm:mb-16">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+            
+            <div class="feature-card bg-white rounded-2xl p-6 shadow-md border border-gray-100 flex flex-col items-center text-center justify-between">
+                <div>
+                    <div class="w-16 h-16 rounded-full bg-hacdo-lightgreen flex items-center justify-center text-hacdo-green text-2xl mb-4 mx-auto">
+                        <i class="fa-solid fa-landmark" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="font-black text-base uppercase text-gray-800 mb-2 leading-snug" data-i18n="card1_title">የጤና ፕሮግራሞች</h3>
+                    <p class="text-xs text-hacdo-textMuted mb-6 leading-relaxed" data-i18n="card1_desc">የጤና መረጃዎችንና አገልግሎቶችን በተቀናጀ መልኩ ማቅረብ።</p>
+                </div>
+                <a href="./Establishment.html" class="w-full bg-hacdo-green hover:bg-emerald-700 text-white font-bold text-xs py-3 px-4 rounded-xl uppercase tracking-wider transition text-center">
+                    <span data-i18n="card1_btn">ይቃኙ</span>
+                </a>
+            </div>
+
+            <div class="feature-card bg-white rounded-2xl p-6 shadow-md border border-gray-100 flex flex-col items-center text-center justify-between">
+                <div>
+                    <div class="w-16 h-16 rounded-full bg-hacdo-lightgreen flex items-center justify-center text-hacdo-green text-2xl mb-4 mx-auto">
+                        <i class="fa-solid fa-eye" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="font-black text-base uppercase text-gray-800 mb-2 leading-snug" data-i18n="card2_title">አካታችነት</h3>
+                    <p class="text-xs text-hacdo-textMuted mb-6 leading-relaxed" data-i18n="card2_desc">ለአካል ጉዳተኞች እና ልዩ ፍላጎት ላላቸው ወገኖች ምቹ ሁኔታዎችን መፍጠር።</p>
+                </div>
+                <a href="./vision.html" class="w-full bg-hacdo-green hover:bg-emerald-700 text-white font-bold text-xs py-3 px-4 rounded-xl uppercase tracking-wider transition text-center">
+                    <span data-i18n="card2_btn">ይቃኙ</span>
+                </a>
+            </div>
+
+            <div class="feature-card bg-white rounded-2xl p-6 shadow-md border border-gray-100 flex flex-col items-center text-center justify-between">
+                <div>
+                    <div class="w-16 h-16 rounded-full bg-hacdo-lightgreen flex items-center justify-center text-hacdo-green text-2xl mb-4 mx-auto">
+                        <i class="fa-solid fa-bullseye" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="font-black text-base uppercase text-gray-800 mb-2 leading-snug" data-i18n="card3_title">የቤተሰብ ማበቃት</h3>
+                    <p class="text-xs text-hacdo-textMuted mb-6 leading-relaxed" data-i18n="card3_desc">የቤተሰብ እና የሴቶችን አቅም በማጎልበት ማህበራዊ መሰረትን ማጠናከር።</p>
+                </div>
+                <a href="./mission.html" class="w-full bg-hacdo-green hover:bg-emerald-700 text-white font-bold text-xs py-3 px-4 rounded-xl uppercase tracking-wider transition text-center">
+                    <span data-i18n="card3_btn">ይቃኙ</span>
+                </a>
+            </div>
+
+            <div class="feature-card bg-white rounded-2xl p-6 shadow-md border border-gray-100 flex flex-col items-center text-center justify-between">
+                <div>
+                    <div class="w-16 h-16 rounded-full bg-hacdo-lightgreen flex items-center justify-center text-hacdo-green text-2xl mb-4 mx-auto">
+                        <i class="fa-solid fa-list-check" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="font-black text-base uppercase text-gray-800 mb-2 leading-snug" data-i18n="card4_title">የህፃናት ድጋፍ</h3>
+                    <p class="text-xs text-hacdo-textMuted mb-6 leading-relaxed" data-i18n="card4_desc">የህፃናትን ትምህርት እና የወደፊት እድል የሚያጎሉ ፕሮግራሞችን መንደፍ።</p>
+                </div>
+                <a href="./rgan.html" class="w-full bg-hacdo-green hover:bg-emerald-700 text-white font-bold text-xs py-3 px-4 rounded-xl uppercase tracking-wider transition text-center">
+                    <span data-i18n="card4_btn">ይቃኙ</span>
+                </a>
+            </div>
+            <div class="feature-card bg-white rounded-2xl p-6 shadow-md border border-gray-100 flex flex-col items-center text-center justify-between">
+                <div>
+                    <div class="w-16 h-16 rounded-full bg-hacdo-lightgreen flex items-center justify-center text-hacdo-green text-2xl mb-4 mx-auto">
+                        <i class="fa-solid fa-star" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="font-black text-base uppercase text-gray-800 mb-2 leading-snug" data-i18n="card5_title">ዋና እሴቶች</h3>
+                    <p class="text-xs text-hacdo-textMuted mb-6 leading-relaxed" data-i18n="card5_desc">ስለ ድርጅቱ ዋና እሴቶች መረጃ።</p>
+                </div>
+                <a href="./core.html" class="w-full bg-hacdo-green hover:bg-emerald-700 text-white font-bold text-xs py-3 px-4 rounded-xl uppercase tracking-wider transition text-center">
+                    <span data-i18n="card5_btn">ይቃኙ</span>
+                </a>
+            </div>
+
+            <div class="feature-card bg-white rounded-2xl p-6 shadow-md border border-gray-100 flex flex-col items-center text-center justify-between">
+                <div>
+                    <div class="w-16 h-16 rounded-full bg-hacdo-lightgreen flex items-center justify-center text-hacdo-green text-2xl mb-4 mx-auto">
+                        <i class="fa-solid fa-list-check" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="font-black text-base uppercase text-gray-800 mb-2 leading-snug" data-i18n="card6_title">የፕሮግራም ዘርፎች</h3>
+                    <p class="text-xs text-hacdo-textMuted mb-6 leading-relaxed" data-i18n="card6_desc">ስለ ድርጅቱ ስትራቴጂካዊ ግቦች ዝርዝር መረጃ።</p>
+                </div>
+                <a href="./Programmatic.html" class="w-full bg-hacdo-green hover:bg-emerald-700 text-white font-bold text-xs py-3 px-4 rounded-xl uppercase tracking-wider transition text-center">
+                    <span data-i18n="card6_btn">ይቃኙ</span>
+                </a>
+            </div>
+
+            <div class="feature-card bg-white rounded-2xl p-6 shadow-md border border-gray-100 flex flex-col items-center text-center justify-between">
+                <div>
+                    <div class="w-16 h-16 rounded-full bg-hacdo-lightgreen flex items-center justify-center text-hacdo-green text-2xl mb-4 mx-auto">
+                        <i class="fa-solid fa-handshake" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="font-black text-base uppercase text-gray-800 mb-2 leading-snug" data-i18n="card7_title">አጋርነቶች እና አውታረ መረቦች</h3>
+                    <p class="text-xs text-hacdo-textMuted mb-6 leading-relaxed" data-i18n="card7_desc">ስለ ድርጅቱ የማህበረሰብ ተሳትፎ ጥረቶች መረጃ።</p>
+                </div>
+                <a href="./Partnerships.html" class="w-full bg-hacdo-green hover:bg-emerald-700 text-white font-bold text-xs py-3 px-4 rounded-xl uppercase tracking-wider transition text-center">
+                    <span data-i18n="card7_btn">ይቃኙ</span>
+                </a>
+            </div>
+
+            <div class="feature-card bg-white rounded-2xl p-6 shadow-md border border-gray-100 flex flex-col items-center text-center justify-between">
+                <div>
+                    <div class="w-16 h-16 rounded-full bg-hacdo-lightgreen flex items-center justify-center text-hacdo-green text-2xl mb-4 mx-auto">
+                        <i class="fa-solid fa-network-wired" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="font-black text-base uppercase text-gray-800 mb-2 leading-snug" data-i18n="card8_title">በአውታረ መረቦች እና በጥምረቶች ውስጥ አባልነት</h3>
+                    <p class="text-xs text-hacdo-textMuted mb-6 leading-relaxed" data-i18n="card8_desc">ስለ ድርጅቱ የረጅም ጊዜ ተነሳሽነቶች መረጃ።</p>
+                </div>
+                <a href="./Membership.html" class="w-full bg-hacdo-green hover:bg-emerald-700 text-white font-bold text-xs py-3 px-4 rounded-xl uppercase tracking-wider transition text-center">
+                    <span data-i18n="card8_btn">ይቃኙ</span>
+                </a>
+            </div>
+            <div class="feature-card bg-white rounded-2xl p-6 shadow-md border border-gray-100 flex flex-col items-center text-center justify-between">
+                <div>
+                    <div class="w-16 h-16 rounded-full bg-hacdo-lightgreen flex items-center justify-center text-hacdo-green text-2xl mb-4 mx-auto">
+                        <i class="fa-solid fa-gears" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="font-black text-base uppercase text-gray-800 mb-2 leading-snug" data-i18n="card9_title">Governance, Management, and Systems</h3>
+                    <p class="text-xs text-hacdo-textMuted mb-6 leading-relaxed" data-i18n="card9_desc">Information about governance, management, and organizational systems.</p>
+                </div>
+                <a href="./Governance.html" class="w-full bg-hacdo-green hover:bg-emerald-700 text-white font-bold text-xs py-3 px-4 rounded-xl uppercase tracking-wider transition text-center">
+                    <span data-i18n="card9_btn">ይቃኙ</span>
+                </a>
+            </div>
+            <div class="feature-card bg-white rounded-2xl p-6 shadow-md border border-gray-100 flex flex-col items-center text-center justify-between">
+                <div>
+                    <div class="w-16 h-16 rounded-full bg-hacdo-lightgreen flex items-center justify-center text-hacdo-green text-2xl mb-4 mx-auto">
+                        <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                    </div>
+                    <h3 id="location_title" class="font-black text-base uppercase text-gray-800 mb-2 leading-snug" data-i18n="location_title">HACDO Office Location</h3>
+                    <p id="location_desc" class="text-xs text-hacdo-textMuted mb-6 leading-relaxed" data-i18n="location_desc"><strong>HACDO Office Location:</strong> [Address] <br> Visit Us!</p>
+                </div>
+                <a href="./hacdoloca.html" class="w-full bg-hacdo-green hover:bg-emerald-700 text-white font-bold text-xs py-3 px-4 rounded-xl uppercase tracking-wider transition text-center">
+                    <span data-i18n="location_btn">EXPLORE</span>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="community" class="max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8 mb-14">
+        <div class="rounded-2xl border border-gray-100 bg-white p-6 shadow-md sm:p-8">
+            <div class="mb-6 flex flex-wrap items-start justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl font-black text-hacdo-blue" data-i18n="wall_title">Community Wall</h2>
+                    <p class="mt-2 text-sm text-hacdo-textMuted" data-i18n="wall_intro">Sign in or create an account to share with the HACDO community.</p>
+                </div>
+                <button id="registrationAdminToggle" type="button" aria-expanded="false" aria-controls="registrationAdminSection" class="rounded-lg border border-hacdo-blue px-4 py-2 text-sm font-semibold text-hacdo-blue hover:bg-blue-50" data-i18n="registration_admin_action">Admin: View registrations</button>
+            </div>
+
+            <div id="wallAuth">
+                <div class="mb-4 flex flex-wrap gap-2">
+                    <button id="showSignIn" type="button" class="rounded-lg bg-hacdo-blue px-4 py-2 text-sm font-semibold text-white" data-i18n="wall_signin_tab">Sign in</button>
+                    <button id="showSignUp" type="button" class="rounded-lg border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-700" data-i18n="wall_signup_tab">Create account</button>
+                </div>
+                <form id="signInForm" class="max-w-md space-y-3">
+                    <label class="block text-sm font-semibold text-gray-700" for="signInEmail" data-i18n="wall_email">Email address</label>
+                    <input id="signInEmail" type="email" autocomplete="email" required class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm">
+                    <label class="block text-sm font-semibold text-gray-700" for="signInPassword" data-i18n="wall_password">Password</label>
+                    <input id="signInPassword" type="password" autocomplete="current-password" required class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm">
+                    <button type="submit" class="rounded-lg bg-hacdo-green px-4 py-2.5 text-sm font-bold text-white" data-i18n="wall_signin">Sign in</button>
+                    <button id="wallForgotPassword" type="button" class="ml-2 text-sm font-semibold text-hacdo-blue underline hover:text-indigo-900" data-i18n="wall_forgot_password">Forgot password?</button>
+                    <button id="wallEmailSignInLink" type="button" class="ml-2 text-sm font-semibold text-hacdo-blue underline hover:text-indigo-900" data-i18n="wall_email_signin_link">Email me a sign-in link</button>
+                </form>
+                <form id="signUpForm" class="hidden max-w-md space-y-3">
+                    <label class="block text-sm font-semibold text-gray-700" for="signUpName" data-i18n="wall_name">Full name</label>
+                    <input id="signUpName" type="text" autocomplete="name" maxlength="100" required class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm">
+                    <label class="block text-sm font-semibold text-gray-700" for="signUpEmail" data-i18n="wall_email">Email address</label>
+                    <input id="signUpEmail" type="email" autocomplete="email" required class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm">
+                    <label class="block text-sm font-semibold text-gray-700" for="signUpPassword" data-i18n="wall_password">Password</label>
+                    <input id="signUpPassword" type="password" autocomplete="new-password" minlength="8" required class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm">
+                    <button type="submit" class="rounded-lg bg-hacdo-green px-4 py-2.5 text-sm font-bold text-white" data-i18n="wall_signup">Create account</button>
+                </form>
+            </div>
+
+            <form id="wallPasswordRecovery" class="hidden max-w-md space-y-3">
+                <label for="wallNewPassword" class="block text-sm font-semibold text-gray-700" data-i18n="wall_new_password">New password</label>
+                <input id="wallNewPassword" type="password" autocomplete="new-password" minlength="8" required class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm">
+                <label for="wallConfirmPassword" class="block text-sm font-semibold text-gray-700" data-i18n="wall_confirm_password">Confirm new password</label>
+                <input id="wallConfirmPassword" type="password" autocomplete="new-password" minlength="8" required class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm">
+                <button type="submit" class="rounded-lg bg-hacdo-green px-4 py-2.5 text-sm font-bold text-white" data-i18n="wall_update_password">Update password</button>
+            </form>
+
+            <div id="wallSignedIn" class="hidden">
+                <div class="mb-5 flex flex-wrap items-center justify-between gap-3">
+                    <p class="text-sm font-semibold text-gray-700"><span data-i18n="wall_signed_in_as">Signed in as</span> <span id="wallUserName"></span></p>
+                    <button id="wallSignOut" type="button" class="rounded-lg border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50" data-i18n="wall_signout">Sign out</button>
+                </div>
+                <form id="wallPostForm" class="space-y-3">
+                    <label for="wallPostBody" class="block text-sm font-semibold text-gray-700" data-i18n="wall_post_label">Share a message</label>
+                    <textarea id="wallPostBody" rows="4" maxlength="2000" required class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:border-hacdo-green focus:outline-none focus:ring-2 focus:ring-hacdo-green/20"></textarea>
+                    <button id="wallPostSubmit" type="submit" class="rounded-lg bg-hacdo-green px-4 py-2.5 text-sm font-bold text-white" data-i18n="wall_post_button">Post to wall</button>
+                </form>
+            </div>
+
+            <p id="wallStatus" class="mt-4 text-sm text-hacdo-textMuted" role="status" aria-live="polite" data-i18n="wall_loading">Loading community posts...</p>
+            <div id="wallPosts" class="mt-6 space-y-4"></div>
+
+            <section id="registrationAdminSection" class="mt-8 hidden border-t border-gray-200 pt-6" aria-labelledby="registrationAdminTitle">
+                <h3 id="registrationAdminTitle" class="mb-4 text-xl font-bold text-hacdo-blue" data-i18n="registration_admin_title">Activity registrations (admin only)</h3>
+                <form id="registrationAdminSignIn" class="max-w-md space-y-3">
+                    <p class="text-sm text-hacdo-textMuted" data-i18n="registration_admin_help">Sign in with an account authorized in Supabase admin_users.</p>
+                    <div>
+                        <label for="registrationAdminEmail" class="mb-1 block text-sm font-semibold text-gray-700" data-i18n="wall_email">Email address</label>
+                        <input id="registrationAdminEmail" type="email" autocomplete="username" required class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm">
+                    </div>
+                    <div>
+                        <label for="registrationAdminPassword" class="mb-1 block text-sm font-semibold text-gray-700" data-i18n="wall_password">Password</label>
+                        <input id="registrationAdminPassword" type="password" autocomplete="current-password" required class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm">
+                    </div>
+                    <button type="submit" class="rounded-lg bg-hacdo-blue px-4 py-2.5 text-sm font-bold text-white hover:bg-indigo-900" data-i18n="registration_admin_signin">Admin sign in</button>
+                </form>
+                <div id="registrationAdminResults" class="hidden">
+                    <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
+                        <p id="registrationAdminCount" class="text-sm font-semibold text-gray-700"></p>
+                        <div class="flex flex-wrap gap-2">
+                            <button id="registrationAdminRefresh" type="button" class="rounded-lg border border-hacdo-blue px-4 py-2 text-sm font-semibold text-hacdo-blue hover:bg-blue-50" data-i18n="registration_admin_refresh">Refresh registrations</button>
+                            <button id="registrationAdminSignOut" type="button" class="rounded-lg border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50" data-i18n="wall_signout">Sign out</button>
+                        </div>
+                    </div>
+                    <div id="registrationAdminList" class="space-y-3"></div>
+                </div>
+            </section>
+        </div>
+    </section>
+
+    <div id="joinModal" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-gray-950/60 p-4" aria-hidden="true">
+        <section role="dialog" aria-modal="true" aria-labelledby="joinModalTitle" class="w-full max-w-lg rounded-2xl bg-white p-6 shadow-2xl sm:p-8">
+            <div class="mb-5 flex items-start justify-between gap-4">
+                <div>
+                    <h2 id="joinModalTitle" class="text-xl font-black text-hacdo-blue" data-i18n="join_title">Join an Activity</h2>
+                    <p class="mt-2 text-sm leading-relaxed text-hacdo-textMuted" data-i18n="join_intro">Enter your contact details and the activity you would like to join.</p>
+                </div>
+                <button type="button" onclick="closeModal('joinModal')" class="rounded-lg p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-800" aria-label="Close" data-i18n-aria-label="join_close">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+            <form id="activityForm" class="space-y-4">
+                <div>
+                    <label for="fullName" class="mb-1 block text-sm font-semibold text-gray-700" data-i18n="join_name">Full name</label>
+                    <input id="fullName" name="name" type="text" placeholder="Full name" autocomplete="name" required class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:border-hacdo-green focus:outline-none focus:ring-2 focus:ring-hacdo-green/20">
+                </div>
+                <div>
+                    <label for="email" class="mb-1 block text-sm font-semibold text-gray-700" data-i18n="join_email">Email address (optional)</label>
+                    <input id="email" name="email" type="email" placeholder="Email address (optional)" autocomplete="email" class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:border-hacdo-green focus:outline-none focus:ring-2 focus:ring-hacdo-green/20">
+                </div>
+                <div>
+                    <label for="phone" class="mb-1 block text-sm font-semibold text-gray-700" data-i18n="join_phone">Phone number</label>
+                    <input id="phone" name="phone" type="tel" autocomplete="tel" class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:border-hacdo-green focus:outline-none focus:ring-2 focus:ring-hacdo-green/20">
+                </div>
+                <div>
+                    <label for="activity" class="mb-1 block text-sm font-semibold text-gray-700" data-i18n="join_activity">Activity you want to join</label>
+                    <input id="activity" name="activity" type="text" placeholder="Activity you want to join" required class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:border-hacdo-green focus:outline-none focus:ring-2 focus:ring-hacdo-green/20">
+                </div>
+                <div>
+                    <label for="message" class="mb-1 block text-sm font-semibold text-gray-700" data-i18n="join_message">Message (optional)</label>
+                    <textarea id="message" name="message" placeholder="Message (optional)" rows="3" class="w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm focus:border-hacdo-green focus:outline-none focus:ring-2 focus:ring-hacdo-green/20"></textarea>
+                </div>
+                <p class="text-xs leading-relaxed text-hacdo-textMuted" data-i18n="join_contact_note">Provide an email address or phone number so we can contact you.</p>
+                <div class="flex justify-end gap-3 pt-2">
+                    <button type="button" onclick="closeModal()" class="rounded-lg border border-gray-300 px-4 py-2.5 text-sm font-semibold text-gray-700 hover:bg-gray-50" data-i18n="join_cancel">Cancel</button>
+                    <button type="submit" id="submitBtn" class="rounded-lg bg-hacdo-green px-4 py-2.5 text-sm font-bold text-white hover:bg-emerald-700" data-i18n="join_submit">Submit Registration</button>
+                </div>
+            </form>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-hacdo-blue text-white pt-12 pb-6 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-xs text-white/80"><span data-i18n="copyright">&copy; 2026 Health For All Community Development Organization (HACDO). All rights reserved.</span><br><span data-i18n="contact_label">Contact us at</span> <a href="mailto:healthforall2501@gmail.com" class="underline hover:text-white">healthforall2501@gmail.com</a></p>
+            <p class="text-xs text-white/80"><span data-i18n="footer_label">About this site:</span> <a href="./about.html" data-i18n="footer_about" class="underline hover:text-white">About This Site</a> | <a href="./privacy.html" data-i18n="footer_privacy" class="underline hover:text-white">Privacy Policy</a> | <a href="./terms.html" data-i18n="footer_terms" class="underline hover:text-white">Terms of Service</a></p>
+            <div class="mt-4 flex justify-end gap-3">
+                <a href="https://www.tiktok.com/@tenalehulum1?is_from_webapp=1&amp;sender_device=pc" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+                    <img src="./img/tiktok.png" alt="" class="h-10 w-10 rounded-lg bg-white/10 p-1.5 shadow-md ring-1 ring-white/20 transition duration-200 hover:scale-105 hover:bg-white/15">
+                </a>
+                <a href="https://www.facebook.com/groups/366543485109517/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                    <img src="./img/facebook.png" alt="" class="h-10 w-10 rounded-lg bg-white/10 p-1.5 shadow-md ring-1 ring-white/20 transition duration-200 hover:scale-105 hover:bg-white/15">
+                </a>
+                <a href="https://t.me/+7DtRBOgs2BtmMWRk" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+                    <img src="./img/telegram.png" alt="" class="h-10 w-10 rounded-lg bg-white/10 p-1.5 shadow-md ring-1 ring-white/20 transition duration-200 hover:scale-105 hover:bg-white/15">
+                </a>
+            </div>
+        </div>
+    
+    </footer>
+
+    <script>
+        let currentLang = 'en';
+
+        const i18nData = {
+            am: {
+                page_title: "ጤና ለሁሉም - የማህበረሰብ ልማት ድርጅት (HACDO)",
+                brand_org_name: "ጤና ለሁሉም የማህበረሰብ ልማት ድርጅት",
+                aria_join: "አሁኑኑ ይቀላቀሉ",
+                aria_language: "ቋንቋ ይቀይሩ",
+                aria_menu: "የአሰሳ ማውጫውን ክፈት ወይም ዝጋ",
+                join_close: "ዝጋ",
+                join_title: "እንቅስቃሴን ይቀላቀሉ",
+                join_intro: "የእውቂያ መረጃዎንና መቀላቀል የሚፈልጉትን እንቅስቃሴ ያስገቡ።",
+                join_name: "ሙሉ ስም",
+                join_email: "የኢሜይል አድራሻ (አማራጭ)",
+                join_phone: "ስልክ ቁጥር",
+                join_activity: "መቀላቀል የሚፈልጉት እንቅስቃሴ",
+                join_message: "መልዕክት (አማራጭ)",
+                join_contact_note: "እንድንገናኝዎ የኢሜይል አድራሻ ወይም ስልክ ቁጥር ያስገቡ።",
+                join_cancel: "ይቅር",
+                join_submit: "ምዝገባ ያስገቡ",
+                wall_title: "የማህበረሰብ ግድግዳ",
+                wall_intro: "ከHACDO ማህበረሰብ ጋር ለመጋራት ይግቡ ወይም መለያ ይፍጠሩ።",
+                registration_admin_action: "አስተዳዳሪ፦ ምዝገባዎችን ይመልከቱ",
+                registration_admin_title: "የእንቅስቃሴ ምዝገባዎች (ለአስተዳዳሪ ብቻ)",
+                registration_admin_refresh: "ምዝገባዎችን አድስ",
+                registration_admin_help: "በSupabase admin_users ውስጥ በተፈቀደ መለያ ይግቡ።",
+                registration_admin_signin: "የአስተዳዳሪ መግቢያ",
+                registration_admin_count: "የተመዘገቡ ተሳታፊዎች",
+                registration_admin_empty: "ገና ምዝገባ የለም።",
+                registration_admin_denied: "ይህ መለያ ምዝገባዎችን ለማየት ፈቃድ የለውም።",
+                registration_admin_load_failed: "ምዝገባዎችን መጫን አልተቻለም።",
+                registration_admin_signin_failed: "የአስተዳዳሪ መግቢያ አልተሳካም።",
+                wall_signin_tab: "ግባ",
+                wall_signup_tab: "መለያ ፍጠር",
+                wall_email: "የኢሜይል አድራሻ",
+                wall_password: "የይለፍ ቃል",
+                wall_name: "ሙሉ ስም",
+                wall_signin: "ግባ",
+                wall_signup: "መለያ ፍጠር",
+                wall_forgot_password: "የይለፍ ቃል ረስተዋል?",
+                wall_email_signin_link: "የመግቢያ ሊንክ በኢሜይል ላክልኝ",
+                wall_new_password: "አዲስ የይለፍ ቃል",
+                wall_confirm_password: "አዲሱን የይለፍ ቃል ያረጋግጡ",
+                wall_update_password: "የይለፍ ቃልን አዘምን",
+                wall_signed_in_as: "ገብተዋል፦",
+                wall_signout: "ውጣ",
+                wall_post_label: "መልዕክት ያጋሩ",
+                wall_post_button: "በግድግዳው ላይ አጋራ",
+                wall_loading: "የማህበረሰቡ ልጥፎች በመጫን ላይ...",
+                wall_empty: "እስካሁን ምንም ልጥፍ የለም። የመጀመሪያውን ያጋሩ!",
+                wall_delete: "ሰርዝ",
+                wall_signup_check_email: "መለያዎን ለማረጋገጥ ኢሜይልዎን ይመልከቱ።",
+                join_contact_required: "ኢሜይል ወይም ስልክ ቁጥር ያስገቡ።",
+                wall_post_error: "ልጥፉን ማስገባት አልተቻለም።",
+                nav_home: "መነሻ", nav_resources: "ግብዓቶች", nav_stories: "እለታዊ የ HACDO ዜና", nav_gallery: "የምስል ማህደር", nav_community: "የማህበረሰብ መድረክ", nav_join: "አሁኑኑ ይቀላቀሉ", nav_join_short: "ይቀላቀሉ", nav_menu: "ምናሌ",
+                hero_badge: "ጤና ለሁሉም መድረክ", hero_title1: "ጤና ለሁሉም:", hero_title2: "ማህበረሰብን ማብቃት", hero_title3: "ህይወትን መለወጥ",
+                hero_subtitle: "ወጣቶችን፣ ሕፃናትን፣ አካል ጉዳተኞችን እና ቤተሰቦችን በማብቃት፣ እኩል ዕድሎችንና ጤናማ ነገን እንዲፈጥሩ እንደግፋለን።", hero_cta1: "ዛሬ ይጀምሩ",
+                card1_title: "የድርጅቱ ዳራ እና አመሠራረት", card1_desc: "ስለ ድርጅቱ ታሪክና አመሠራረት አጠቃላይ መረጃ።", card1_btn: "ይመልከቱ",
+                card2_title: "ራዕይ", card2_desc: "አካል ጉዳተኞች ተደራሽ የሆኑ ዕድሎችን መፍጠር።", card2_btn: "ይመልከቱ",
+                card3_title: "ተልዕኮ", card3_desc: "ቤተሰቦችን በማብቃት ማህበራዊ መሠረቶችን ማጠናከር።", card3_btn: "ይመልከቱ",
+                card4_title: "የድርጅቱ ዓላማዎች", card4_desc: "ለሕፃናት የትምህርትና የልማት ፕሮግራሞችን መንደፍ።", card4_btn: "ይመልከቱ",
+                card5_title: "ዋና እሴቶች", card5_desc: "ስለ ድርጅቱ ዋና እሴቶች መረጃ።",
+                card6_title: "የፕሮግራም ዘርፎች", card6_desc: "ስለ ድርጅቱ ስትራቴጂያዊ ግቦች ዝርዝር መረጃ።",
+                card7_title: "አጋርነቶች እና አውታረ መረቦች", card7_desc: "ድርጅቱ ማህበረሰቡን ለማሳተፍ ስለሚያደርጋቸው ጥረቶች መረጃ።",
+                card8_title: "በአውታረ መረቦች እና በጥምረቶች ውስጥ አባልነት", card8_desc: "ስለ ድርጅቱ የረጅም ጊዜ ተነሳሽነቶች መረጃ።",
+                card9_title: "ድርጅታዊ አስተዳደር፣ አመራር እና ሥርዓቶች", card9_desc: "ስለ ድርጅታዊ አስተዳደር፣ አመራር እና ሥርዓቶች መረጃ።", card9_btn: "ይመልከቱ",
+                location_title: "የHACDO ቢሮ አድራሻ", location_desc: "የHACDO ቢሮ የሚገኝበት አካባቢ።", location_btn: "አድራሻውን ይመልከቱ",
+                card5_btn: "ይመልከቱ", card6_btn: "ይመልከቱ", card7_btn: "ይመልከቱ", card8_btn: "ይመልከቱ",
+                copyright: "© 2026 ጤና ለሁሉም የማህበረሰብ ልማት ድርጅት (HACDO)። መብቱ በሕግ የተጠበቀ ነው።",
+                contact_label: "ያግኙን፦", footer_label: "ስለዚህ ድረ-ገጽ፦",
+                footer_about: "ስለ ድረ-ገጹ", footer_privacy: "የግላዊነት መመሪያ", footer_terms: "የአገልግሎት ውሎች"
+            },
+            om: {
+                page_title: "Health For All - Waa'ee Dhaabbata Keenyaa",
+                brand_org_name: "Dhaabbata Misooma Hawaasaa Fayyaa Hundaaf",
+                aria_join: "Nu waliin makamaa",
+                aria_language: "Afaan jijjiiri",
+                aria_menu: "Baafata banuu",
+                join_close: "Cufi",
+                join_title: "Hirmaannaa Sochii Tokkootti Makamaa",
+                join_intro: "Odeeffannoo quunnamtii fi sochii irratti hirmaachuu barbaaddan galchaa.",
+                join_name: "Maqaa guutuu",
+                join_email: "Teessoo imeelii (dirqama miti)",
+                join_phone: "Lakkoofsa bilbilaa",
+                join_activity: "Sochii irratti hirmaachuu barbaaddan",
+                join_message: "Ergaa (dirqama miti)",
+                join_contact_note: "Akka isin quunnamnuuf teessoo imeelii yookaan lakkoofsa bilbilaa galchaa.",
+                join_cancel: "Dhiisi",
+                join_submit: "Galmee Galchi",
+                wall_title: "Dallaa Hawaasaa",
+                wall_intro: "Hawaasa HACDO waliin qooduuf seenaa yookaan herrega banuu.",
+                registration_admin_action: "Bulchaa: Galmee ilaali",
+                registration_admin_title: "Galmee sochii (bulchaaf qofa)",
+                registration_admin_refresh: "Galmee haaromsi",
+                registration_admin_help: "Akkaawuntii Supabase admin_users keessatti hayyamameen seenaa.",
+                registration_admin_signin: "Seensa bulchaa",
+                registration_admin_count: "Hirmaattota galmaa'an",
+                registration_admin_empty: "Galmeen hin jiru.",
+                registration_admin_denied: "Akkaawuntiin kun galmee ilaaluuf hayyama hin qabu.",
+                registration_admin_load_failed: "Galmee fe'uun hin danda'amne.",
+                registration_admin_signin_failed: "Seensa bulchaa hin milkoofne.",
+                wall_signin_tab: "Seeni",
+                wall_signup_tab: "Herrega bani",
+                wall_email: "Teessoo imeelii",
+                wall_password: "Jecha icciitii",
+                wall_name: "Maqaa guutuu",
+                wall_signin: "Seeni",
+                wall_signup: "Herrega bani",
+                wall_forgot_password: "Jecha icciitii irraanfatte?",
+                wall_email_signin_link: "Liinkii seensaa imeeliidhaan naaf ergi",
+                wall_new_password: "Jecha icciitii haaraa",
+                wall_confirm_password: "Jecha icciitii haaraa mirkaneessi",
+                wall_update_password: "Jecha icciitii haaromsi",
+                wall_signed_in_as: "Akka kanaan seente:",
+                wall_signout: "Ba'i",
+                wall_post_label: "Ergaa qoodi",
+                wall_post_button: "Dallaa irratti maxxansi",
+                wall_loading: "Ergaawwan hawaasaa fe'aa jira...",
+                wall_empty: "Ammaaf ergaan hin jiru. Isa jalqabaa qoodi!",
+                wall_delete: "Haqi",
+                wall_signup_check_email: "Herrega kee mirkaneessuuf imeelii kee ilaali.",
+                join_contact_required: "Teessoo imeelii yookaan lakkoofsa bilbilaa galchi.",
+                wall_post_error: "Ergaa maxxansuun hin danda'amne.",
+                nav_home: "ASHERO'O", nav_resources: "SIDO'O", nav_stories: "AGGANA", nav_gallery: "GALEERII", nav_community: "Hardee_Chababato", nav_join: "EXXEHE", nav_join_short: "Makamaa", nav_menu: "Baafata",
+                hero_badge: "Waltajjii Fayyaa Hundaaf", hero_title1: "FAYYAA HUNDAAF:", hero_title2: "Hawaasa Aangessuu", hero_title3: "Jireenya Jijjiiruu",
+                hero_subtitle: "Dargaggoota, daa'imman, namoota qaama miidhamtootaa fi maatiiwwaniif carraa walqixaa fi egeree fayya qabeessa uumuuf ni hojjenna.", hero_cta1: "Har'a Eegalaa",
+                card1_title: "Seenaa fi Hundeeffama", card1_desc: "Seenaa hundeeffamaa fi jalqaba hojii dhaabbatichaa dhiyeessuu.", card1_btn: "ILAALAA",
+                card2_title: "Mul'ata", card2_desc: "Namoota qaama miidhamtootaaf carraa dhaqqabamaa uumu.", card2_btn: "ILAALAA",
+                card3_title: "Ergama", card3_desc: "Maatiiwwan cimsuun bu'uura hawaasummaa jabeessuu.", card3_btn: "ILAALAA",
+                card4_title: "Kaayyoo Dhaabbatichaa", card4_desc: "Daa'immaniif sagantaalee barnootaa fi misoomaa qopheessuu.", card4_btn: "ILAALAA",
+                card5_title: "Duudhaalee Bu'uuraa", card5_desc: "Odeeffannoo waa'ee duudhaalee bu'uuraa dhaabbatichaa.",
+                card6_title: "Naannoowwan Sagantaa", card6_desc: "Ibsa bal'aa waa'ee galmoota tarsiimoo dhaabbatichaa.",
+                card7_title: "Michoomaa fi Neetworkii", card7_desc: "Odeeffannoo waa'ee carraaqqii hirmaannaa hawaasaa dhaabbatichaa.",
+                card8_title: "Miseensummaa Neetworkii fi Gamtaa Keessatti", card8_desc: "Odeeffannoo waa'ee hojiiwwan yeroo dheeraa dhaabbatichaa.",
+                card9_title: "Bulchiinsa, Hoogganummaa fi Sirnoota", card9_desc: "Odeeffannoo waa'ee bulchiinsa, hoogganummaa fi sirnoota dhaabbatichaa.", card9_btn: "ILAALAA",
+                location_title: "Teessuma Waajjira HACDO", location_desc: "Bakka waajjirri HACDO argamu.", location_btn: "TEESSUMA ILAALI",
+                copyright: "© 2026 Health For All Community Development Organization (HACDO). Mirgi hundi seeraan eegama.",
+                contact_label: "Nu quunnamaa:", footer_label: "Waa'ee marsariitichaa:",
+                footer_about: "Waa'ee Marsariitichaa", footer_privacy: "Imaammata Iccitii", footer_terms: "Haala Tajaajilaa"
+            },
+            en: {
+                page_title: "Health For All Community Development Organization / HACDO",
+                brand_org_name: "Health For All Community Development Organization",
+                aria_join: "Join now",
+                aria_language: "Change language",
+                aria_menu: "Toggle navigation",
+                join_close: "Close",
+                join_title: "Join an Activity",
+                join_intro: "Enter your contact details and the activity you would like to join.",
+                join_name: "Full name",
+                join_email: "Email address (optional)",
+                join_phone: "Phone number",
+                join_activity: "Activity you want to join",
+                join_message: "Message (optional)",
+                join_contact_note: "Provide an email address or phone number so we can contact you.",
+                join_cancel: "Cancel",
+                join_submit: "Submit Registration",
+                wall_title: "Community Wall",
+                wall_intro: "Sign in or create an account to share with the HACDO community.",
+                registration_admin_action: "Admin: View registrations",
+                registration_admin_title: "Activity registrations (admin only)",
+                registration_admin_refresh: "Refresh registrations",
+                registration_admin_help: "Sign in with an account authorized in Supabase admin_users.",
+                registration_admin_signin: "Admin sign in",
+                registration_admin_count: "Registered participants",
+                registration_admin_empty: "No activity registrations yet.",
+                registration_admin_denied: "This account is not authorized to view registrations.",
+                registration_admin_load_failed: "Could not load activity registrations.",
+                registration_admin_signin_failed: "Admin sign-in failed.",
+                wall_signin_tab: "Sign in",
+                wall_signup_tab: "Create account",
+                wall_email: "Email address",
+                wall_password: "Password",
+                wall_name: "Full name",
+                wall_signin: "Sign in",
+                wall_signup: "Create account",
+                wall_forgot_password: "Forgot password?",
+                wall_email_signin_link: "Email me a sign-in link",
+                wall_new_password: "New password",
+                wall_confirm_password: "Confirm new password",
+                wall_update_password: "Update password",
+                wall_signed_in_as: "Signed in as",
+                wall_signout: "Sign out",
+                wall_post_label: "Share a message",
+                wall_post_button: "Post to wall",
+                wall_loading: "Loading community posts...",
+                wall_empty: "No posts yet. Be the first to share!",
+                wall_delete: "Delete",
+                wall_signup_check_email: "Check your email to confirm your account.",
+                join_contact_required: "Enter an email address or phone number.",
+                wall_post_error: "Could not publish the post.",
+                nav_home: "HOME", nav_resources: "RESOURCES", nav_stories: "DAILY HACDO'S NEWS", nav_gallery: "GALLERY", nav_community: "COMMUNITY WALL", nav_join: "JOIN NOW", nav_join_short: "Join", nav_menu: "Menu",
+                hero_badge: "Health For All Platform", hero_title1: "Health For All:", hero_title2: "Empowering Communities,", hero_title3: "Transforming Lives",
+                hero_subtitle: "Empowering youth, children, persons with disabilities, and families to create equal opportunities and a healthier tomorrow.", hero_cta1: "Get Started Today",
+                card1_title: "Background and Establishment", card1_desc: "An overview of the organization's history and establishment.", card1_btn: "EXPLORE",
+                card2_title: "Vision", card2_desc: "Creating accessible opportunities for persons with disabilities.", card2_btn: "EXPLORE",
+                card3_title: "Mission", card3_desc: "Strengthening social foundations by empowering families.", card3_btn: "EXPLORE",
+                card4_title: "Organizational Objectives", card4_desc: "Designing educational and development programs for children.", card4_btn: "EXPLORE",
+                card5_title: "Core Values", card5_desc: "Information about the organization's core values.", card5_btn: "EXPLORE",
+                card6_title: "Programmatic Areas", card6_desc: "Details about the organization's strategic goals.", card6_btn: "EXPLORE",
+                card7_title: "Partnerships and Networks", card7_desc: "Information about the organization's community engagement efforts.", card7_btn: "EXPLORE",
+                card8_title: "Membership in Networks and Consortia", card8_desc: "Information about the organization's long-term initiatives.", card8_btn: "EXPLORE",
+                card9_title: "Governance, Management, and Systems", card9_desc: "Information about governance, management, and organizational systems.", card9_btn: "EXPLORE",
+                location_title: "HACDO Office Location", location_desc: "Location of the HACDO office.", location_btn: "VIEW LOCATION",
+                copyright: "© 2026 Health For All Community Development Organization (HACDO). All rights reserved.",
+                contact_label: "Contact us at", footer_label: "About this site:",
+                footer_about: "About This Site", footer_privacy: "Privacy Policy", footer_terms: "Terms of Service"
+            }
+            
+        };
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            const labels = { am: 'አማርኛ', om: 'Affan Oromo', en: 'English' };
+            if (!i18nData[lang]) {
+                return;
+            }
+
+            document.documentElement.lang = lang;
+            document.getElementById('currentLangLabel').innerText = labels[lang];
+            
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (i18nData[lang] && i18nData[lang][key]) {
+                    el.textContent = i18nData[lang][key];
+                }
+            });
+
+            document.querySelectorAll('[data-i18n-aria-label]').forEach(el => {
+                const key = el.getAttribute('data-i18n-aria-label');
+                if (i18nData[lang][key]) {
+                    el.setAttribute('aria-label', i18nData[lang][key]);
+                }
+            });
+            document.title = i18nData[lang].page_title;
+            document.getElementById('langDropdown').classList.add('hidden');
+        }
+
+        function toggleLanguageDropdown() {
+            document.getElementById('langDropdown').classList.toggle('hidden');
+        }
+
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (!modal) {
+                return;
+            }
+            modal.classList.remove('hidden');
+            modal.setAttribute('aria-hidden', 'false');
+            const firstInput = modal.querySelector('input');
+            if (firstInput) {
+                firstInput.focus();
+            }
+        }
+
+        function closeModal(modalId = 'joinModal') {
+            const modal = document.getElementById(modalId);
+            if (!modal) {
+                return;
+            }
+            modal.classList.add('hidden');
+            modal.setAttribute('aria-hidden', 'true');
+        }
+
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape' && !document.getElementById('joinModal').classList.contains('hidden')) {
+                closeModal('joinModal');
+            }
+        });
+
+        setLanguage('en');
+
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+            mobileMenuBtn.setAttribute('aria-expanded', String(!isExpanded));
+            navMenu.classList.toggle('hidden', isExpanded);
+            mobileMenuBtn.querySelector('i').classList.toggle('fa-bars', isExpanded);
+            mobileMenuBtn.querySelector('i').classList.toggle('fa-xmark', !isExpanded);
+        });
+
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.matchMedia('(max-width: 767px)').matches) {
+                    navMenu.classList.add('hidden');
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                    mobileMenuBtn.querySelector('i').classList.replace('fa-xmark', 'fa-bars');
+                }
+            });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25/build/js/intlTelInput.min.js"></script>
+    <script type="module">
+        import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+        import { SUPABASE_URL, SUPABASE_ANON_KEY, fetchWithTimeout } from './supabase-config.js';
+        import { isAdminUser } from './supabase-admin.js';
+
+        const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+            global: { fetch: fetchWithTimeout }
+        });
+        const phoneInputInstances = new Map();
+        for (const input of document.querySelectorAll('#phone')) {
+            phoneInputInstances.set(input.id, window.intlTelInput(input, {
+                initialCountry: 'et',
+                preferredCountries: ['et', 'us', 'gb', 'ke', 'so', 'er', 'dj'],
+                separateDialCode: true,
+                nationalMode: true,
+                autoPlaceholder: 'polite',
+                loadUtils: () => import('https://cdn.jsdelivr.net/npm/intl-tel-input@25/build/js/utils.js')
+            }));
+        }
+
+        async function internationalPhone(inputId) {
+            const input = document.getElementById(inputId);
+            if (!input.value.trim()) return '';
+            const phoneInput = phoneInputInstances.get(inputId);
+            if (!phoneInput) throw new Error('The country-code selector did not load. Refresh the page and try again.');
+            await phoneInput.promise;
+            if (!phoneInput.isValidNumber()) {
+                throw new Error('Enter a valid phone number for the selected country.');
+            }
+            return phoneInput.getNumber();
+        }
+
+        const wallMessages = {
+            en: {
+                loading: 'Loading community posts...',
+                empty: 'No posts yet. Be the first to share!',
+                delete: 'Delete',
+                signupCheckEmail: 'Check your email to confirm your account.',
+                enterEmailForReset: 'Enter your account email above first.',
+                passwordResetSent: 'If an account exists for that email, a password reset link has been sent.',
+                signInLinkSent: 'If an account exists for that email, a sign-in link has been sent.',
+                passwordUpdated: 'Your password has been updated.',
+                passwordMismatch: 'The passwords do not match.',
+                invalidLogin: 'These email and password details could not be verified. Make sure this email has an account in this Supabase project. If you previously created the account with Google, use Forgot password? to set an email password; phone-only accounts need an email/password account.',
+                signInToPost: 'Please sign in to post.',
+                setupRequired: 'Community Wall is not set up in Supabase yet. Run supabase/community_wall_setup.sql in the Supabase SQL Editor, then refresh this page.'
+            },
+            am: {
+                loading: 'የማህበረሰቡ ልጥፎች በመጫን ላይ...',
+                empty: 'እስካሁን ምንም ልጥፍ የለም። የመጀመሪያውን ያጋሩ!',
+                delete: 'ሰርዝ',
+                signupCheckEmail: 'መለያዎን ለማረጋገጥ ኢሜይልዎን ይመልከቱ።',
+                enterEmailForReset: 'ከላይ የመለያዎን ኢሜይል ያስገቡ።',
+                passwordResetSent: 'የይለፍ ቃል መመለሻ ኢሜይል ካለ ወደዚህ አድራሻ ተልኳል።',
+                signInLinkSent: 'በዚህ ኢሜይል መለያ ካለ፣ የመግቢያ ሊንክ ተልኳል።',
+                passwordUpdated: 'የይለፍ ቃልዎ ተቀይሯል።',
+                passwordMismatch: 'የይለፍ ቃሎቹ አይዛመዱም።',
+                invalidLogin: 'ይህን ኢሜይልና የይለፍ ቃል ማረጋገጥ አልተቻለም። ኢሜይሉ በዚህ Supabase ፕሮጀክት ውስጥ ያለ መለያ መሆኑን ያረጋግጡ። መለያውን ቀድሞ በGoogle ከፈጠሩት፣ የኢሜይል ይለፍ ቃል ለማዘጋጀት Forgot password? ይጠቀሙ፤ ስልክ ብቻ ያለው መለያ የኢሜይልና የይለፍ ቃል መለያ ይፈልጋል።',
+                signInToPost: 'ለመለጠፍ እባክዎ ይግቡ።',
+                setupRequired: 'የማህበረሰብ ግድግዳው በSupabase ላይ አልተዘጋጀም። supabase/community_wall_setup.sql በSupabase SQL Editor ውስጥ ያስኪዱ፣ ከዚያ ገጹን ያድሱ።'
+            },
+            om: {
+                loading: 'Ergaawwan hawaasaa fe’aa jira...',
+                empty: 'Ammaaf ergaan hin jiru. Isa jalqabaa qoodi!',
+                delete: 'Haqi',
+                signupCheckEmail: 'Herrega kee mirkaneessuuf imeelii kee ilaali.',
+                enterEmailForReset: 'Jalqaba imeelii herrega kee armaan olii galchi.',
+                passwordResetSent: 'Yoo herregni imeelii kanaan jiru taʼe, imeelli jecha icciitii deebisuu ergameera.',
+                signInLinkSent: 'Yoo imeelii kanaan herregni jiraate, liinkiin seensaa ergameera.',
+                passwordUpdated: 'Jecha icciitii kee jijjiirameera.',
+                passwordMismatch: 'Jechoonni icciitii wal hin fakkaatan.',
+                invalidLogin: 'Imeelii fi jecha icciitii kana mirkaneessuun hin danda’amne. Imeeliin kun pirojektii Supabase kana keessatti akkaawuntii qabaachuu isaa mirkaneessi. Yoo duraan Google fayyadamuun herrega uumte, jecha icciitii imeelii kaa’uuf Forgot password? fayyadami; herregni bilbila qofa qabu herrega imeelii fi jecha icciitii barbaada.',
+                signInToPost: 'Maxxansuuf maaloo seeni.',
+                setupRequired: 'Dallaan Hawaasaa Supabase irratti hin qophoofne. supabase/community_wall_setup.sql Supabase SQL Editor keessatti raasi, achiis fuula haaromsi.'
+            }
+        };
+        const wallText = key => wallMessages[document.documentElement.lang]?.[key] || wallMessages.en[key];
+        const wallErrorText = error => error.code === 'PGRST205'
+            ? wallText('setupRequired')
+            : error.message;
+
+        document.getElementById('activityForm').addEventListener('submit', async event => {
+            event.preventDefault();
+
+            const submitBtn = document.getElementById('submitBtn');
+            const email = document.getElementById('email').value.trim();
+            const phoneValue = document.getElementById('phone').value.trim();
+            if (!email && !phoneValue) {
+                alert(i18nData[currentLang].join_contact_required);
+                return;
+            }
+            submitBtn.disabled = true;
+            submitBtn.innerText = 'Submitting...';
+
+            try {
+                const formData = {
+                    full_name: document.getElementById('fullName').value.trim(),
+                    email: email || null,
+                    phone: await internationalPhone('phone'),
+                    activity: document.getElementById('activity').value.trim(),
+                    message: document.getElementById('message').value.trim()
+                };
+                const { error } = await supabase
+                    .from('activity_registrations')
+                    .insert([formData]);
+
+                if (error) {
+                    throw error;
+                }
+
+                alert('በተሳካ ሁኔታ ተመዝግበዋል! እናመሰግናለን።');
+                document.getElementById('activityForm').reset();
+                closeModal();
+                if (isRegistrationAdmin && !registrationAdminResults.classList.contains('hidden')) {
+                    await loadActivityRegistrations();
+                }
+            } catch (error) {
+                alert('ስህተት ተከሰቷል፡ ' + error.message);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerText = 'Submit Registration';
+            }
+        });
+
+        const wallAuth = document.getElementById('wallAuth');
+        const wallSignedIn = document.getElementById('wallSignedIn');
+        const wallStatus = document.getElementById('wallStatus');
+        const wallPosts = document.getElementById('wallPosts');
+        const signInForm = document.getElementById('signInForm');
+        const signUpForm = document.getElementById('signUpForm');
+        const wallPasswordRecovery = document.getElementById('wallPasswordRecovery');
+        const registrationAdminSection = document.getElementById('registrationAdminSection');
+        const registrationAdminSignIn = document.getElementById('registrationAdminSignIn');
+        const registrationAdminResults = document.getElementById('registrationAdminResults');
+        const registrationAdminList = document.getElementById('registrationAdminList');
+        let wallUser = null;
+        let isRegistrationAdmin = false;
+        let isPasswordRecovery = false;
+
+        function setWallStatus(message, isError = false) {
+            wallStatus.textContent = message;
+            wallStatus.classList.toggle('text-red-600', isError);
+            wallStatus.classList.toggle('text-hacdo-textMuted', !isError);
+        }
+
+        function showAuthMode(mode) {
+            const signingIn = mode === 'signin';
+            signInForm.classList.toggle('hidden', !signingIn);
+            signUpForm.classList.toggle('hidden', signingIn);
+            document.getElementById('showSignIn').className = signingIn
+                ? 'rounded-lg bg-hacdo-blue px-4 py-2 text-sm font-semibold text-white'
+                : 'rounded-lg border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-700';
+            document.getElementById('showSignUp').className = signingIn
+                ? 'rounded-lg border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-700'
+                : 'rounded-lg bg-hacdo-blue px-4 py-2 text-sm font-semibold text-white';
+        }
+
+        function updateWallAuth(user) {
+            if (wallUser?.id !== user?.id) {
+                isRegistrationAdmin = false;
+                registrationAdminResults.classList.add('hidden');
+                registrationAdminSignIn.classList.remove('hidden');
+                registrationAdminList.replaceChildren();
+            }
+            wallUser = user;
+            wallAuth.classList.toggle('hidden', Boolean(user));
+            wallSignedIn.classList.toggle('hidden', !user);
+            if (!user) {
+                registrationAdminSignIn.reset();
+            }
+            if (user) {
+                document.getElementById('wallUserName').textContent =
+                    user.user_metadata?.full_name || user.email || user.phone || '';
+            }
+        }
+
+        async function verifyRegistrationAdmin(user) {
+            return isAdminUser(supabase, user);
+        }
+
+        async function loadActivityRegistrations() {
+            const { data, error } = await supabase
+                .from('activity_registrations')
+                .select('id,full_name,email,phone,activity,message,created_at')
+                .order('created_at', { ascending: false })
+                .limit(500);
+            if (error) {
+                console.error('Loading activity registrations failed:', error);
+                setWallStatus(`${i18nData[currentLang].registration_admin_load_failed} ${error.message}`, true);
+                return;
+            }
+
+            registrationAdminList.replaceChildren();
+            const registrations = data || [];
+            document.getElementById('registrationAdminCount').textContent =
+                `${i18nData[currentLang].registration_admin_count}: ${registrations.length}`;
+            if (!registrations.length) {
+                const empty = document.createElement('p');
+                empty.className = 'rounded-lg bg-gray-50 p-4 text-sm text-hacdo-textMuted';
+                empty.textContent = i18nData[currentLang].registration_admin_empty;
+                registrationAdminList.append(empty);
+                return;
+            }
+
+            for (const registration of registrations) {
+                const card = document.createElement('article');
+                card.className = 'rounded-xl border border-gray-200 bg-gray-50 p-4';
+                const details = [
+                    ['Name', registration.full_name],
+                    ['Email', registration.email || '—'],
+                    ['Phone', registration.phone || '—'],
+                    ['Activity', registration.activity],
+                    ['Message', registration.message || '—'],
+                    ['Registered', new Date(registration.created_at).toLocaleString()]
+                ];
+                for (const [label, value] of details) {
+                    const line = document.createElement('p');
+                    line.className = 'mb-1 break-words text-sm text-gray-700';
+                    const strong = document.createElement('strong');
+                    strong.className = 'text-hacdo-blue';
+                    strong.textContent = `${label}: `;
+                    line.append(strong, document.createTextNode(value));
+                    card.append(line);
+                }
+                registrationAdminList.append(card);
+            }
+        }
+
+        async function loadWallPosts() {
+            setWallStatus(wallText('loading'));
+            try {
+                const { data, error } = await supabase
+                    .from('community_posts')
+                    .select('id, author_id, author_name, body, created_at')
+                    .order('created_at', { ascending: false })
+                    .limit(100);
+                if (error) throw error;
+
+                wallPosts.replaceChildren();
+                if (!data.length) {
+                    setWallStatus(wallText('empty'));
+                    return;
+                }
+
+                setWallStatus('');
+                for (const post of data) {
+                    const card = document.createElement('article');
+                    card.className = 'rounded-xl border border-gray-200 bg-gray-50 p-4';
+
+                    const header = document.createElement('div');
+                    header.className = 'mb-2 flex flex-wrap items-center justify-between gap-2';
+                    const author = document.createElement('strong');
+                    author.className = 'text-sm font-bold text-hacdo-blue';
+                    author.textContent = post.author_name;
+                    const date = document.createElement('time');
+                    date.className = 'text-xs text-gray-500';
+                    date.dateTime = post.created_at;
+                    date.textContent = new Date(post.created_at).toLocaleString();
+                    header.append(author, date);
+
+                    const content = document.createElement('p');
+                    content.className = 'whitespace-pre-wrap break-words text-sm leading-relaxed text-gray-700';
+                    content.textContent = post.body;
+                    card.append(header, content);
+
+                    if (wallUser && post.author_id === wallUser.id) {
+                        const deleteButton = document.createElement('button');
+                        deleteButton.type = 'button';
+                        deleteButton.className = 'mt-3 text-xs font-semibold text-red-700 hover:underline';
+                        deleteButton.textContent = wallText('delete');
+                        deleteButton.addEventListener('click', () => deleteWallPost(post.id));
+                        card.append(deleteButton);
+                    }
+                    wallPosts.append(card);
+                }
+            } catch (error) {
+                console.error('Loading community posts failed:', error);
+                setWallStatus(wallErrorText(error), true);
+            }
+        }
+
+        async function deleteWallPost(postId) {
+            if (!window.confirm(wallText('delete') + '?')) {
+                return;
+            }
+            const { error } = await supabase
+                .from('community_posts')
+                .delete()
+                .eq('id', postId);
+            if (error) {
+                setWallStatus(wallErrorText(error), true);
+                return;
+            }
+            await loadWallPosts();
+        }
+
+        document.getElementById('showSignIn').addEventListener('click', () => showAuthMode('signin'));
+        document.getElementById('showSignUp').addEventListener('click', () => showAuthMode('signup'));
+        document.getElementById('registrationAdminToggle').addEventListener('click', async () => {
+            const button = document.getElementById('registrationAdminToggle');
+            const opening = registrationAdminSection.classList.contains('hidden');
+            registrationAdminSection.classList.toggle('hidden', !opening);
+            button.setAttribute('aria-expanded', String(opening));
+            if (!opening) return;
+
+            registrationAdminSignIn.classList.toggle('hidden', isRegistrationAdmin);
+            registrationAdminResults.classList.toggle('hidden', !isRegistrationAdmin);
+            if (!wallUser) return;
+            try {
+                isRegistrationAdmin = await verifyRegistrationAdmin(wallUser);
+                if (!isRegistrationAdmin) {
+                    registrationAdminSignIn.classList.remove('hidden');
+                    registrationAdminResults.classList.add('hidden');
+                    setWallStatus(i18nData[currentLang].registration_admin_denied, true);
+                    return;
+                }
+                registrationAdminSignIn.classList.add('hidden');
+                registrationAdminResults.classList.remove('hidden');
+                await loadActivityRegistrations();
+            } catch (error) {
+                console.error('Checking activity registration administrator access failed:', error);
+                setWallStatus(`${i18nData[currentLang].registration_admin_load_failed} ${error.message}`, true);
+            }
+        });
+        document.getElementById('registrationAdminRefresh').addEventListener('click', async event => {
+            const button = event.currentTarget;
+            button.disabled = true;
+            try {
+                await loadActivityRegistrations();
+            } finally {
+                button.disabled = false;
+            }
+        });
+        registrationAdminSignIn.addEventListener('submit', async event => {
+            event.preventDefault();
+            const submitButton = registrationAdminSignIn.querySelector('button[type="submit"]');
+            submitButton.disabled = true;
+            try {
+                const { data, error } = await supabase.auth.signInWithPassword({
+                    email: document.getElementById('registrationAdminEmail').value.trim().toLowerCase(),
+                    password: document.getElementById('registrationAdminPassword').value
+                });
+                if (error) throw error;
+                if (!await verifyRegistrationAdmin(data.user)) {
+                    await supabase.auth.signOut();
+                    setWallStatus(i18nData[currentLang].registration_admin_denied, true);
+                    return;
+                }
+                isRegistrationAdmin = true;
+                registrationAdminSignIn.reset();
+                registrationAdminSignIn.classList.add('hidden');
+                registrationAdminResults.classList.remove('hidden');
+                await loadActivityRegistrations();
+            } catch (error) {
+                console.error('Activity registration admin sign-in failed:', error);
+                setWallStatus(`${i18nData[currentLang].registration_admin_signin_failed} ${error.message}`, true);
+            } finally {
+                submitButton.disabled = false;
+            }
+        });
+        document.getElementById('registrationAdminSignOut').addEventListener('click', async () => {
+            const { error } = await supabase.auth.signOut();
+            if (error) {
+                console.error('Activity registration admin sign-out failed:', error);
+                setWallStatus(error.message, true);
+                return;
+            }
+            isRegistrationAdmin = false;
+            registrationAdminList.replaceChildren();
+            registrationAdminResults.classList.add('hidden');
+            registrationAdminSignIn.classList.remove('hidden');
+        });
+        document.getElementById('wallForgotPassword').addEventListener('click', async event => {
+            const button = event.currentTarget;
+            const emailInput = document.getElementById('signInEmail');
+            const email = emailInput.value.trim().toLowerCase();
+            if (!email) {
+                emailInput.focus();
+                setWallStatus(wallText('enterEmailForReset'), true);
+                return;
+            }
+            button.disabled = true;
+            setWallStatus('');
+            try {
+                const redirectUrl = new URL(window.location.href);
+                redirectUrl.hash = 'community';
+                const { error } = await supabase.auth.resetPasswordForEmail(email, {
+                    redirectTo: redirectUrl.toString()
+                });
+                if (error) throw error;
+                setWallStatus(wallText('passwordResetSent'));
+            } catch (error) {
+                console.error('Community Wall password reset request failed:', error);
+                setWallStatus(error.message, true);
+            } finally {
+                button.disabled = false;
+            }
+        });
+
+        document.getElementById('wallEmailSignInLink').addEventListener('click', async event => {
+            const button = event.currentTarget;
+            const emailInput = document.getElementById('signInEmail');
+            const email = emailInput.value.trim().toLowerCase();
+            if (!email) {
+                emailInput.focus();
+                setWallStatus(wallText('enterEmailForReset'), true);
+                return;
+            }
+            button.disabled = true;
+            setWallStatus('');
+            try {
+                const redirectUrl = new URL(window.location.href);
+                redirectUrl.hash = 'community';
+                const { error } = await supabase.auth.signInWithOtp({
+                    email,
+                    options: {
+                        emailRedirectTo: redirectUrl.toString(),
+                        shouldCreateUser: false
+                    }
+                });
+                if (error) throw error;
+                setWallStatus(wallText('signInLinkSent'));
+            } catch (error) {
+                console.error('Community Wall email sign-in link request failed:', error);
+                setWallStatus(error.message, true);
+            } finally {
+                button.disabled = false;
+            }
+        });
+
+        signInForm.addEventListener('submit', async event => {
+            event.preventDefault();
+            const submitButton = signInForm.querySelector('button[type="submit"]');
+            submitButton.disabled = true;
+            try {
+                const { error } = await supabase.auth.signInWithPassword({
+                    email: document.getElementById('signInEmail').value.trim().toLowerCase(),
+                    password: document.getElementById('signInPassword').value
+                });
+                if (error) throw error;
+            } catch (error) {
+                console.error('Community Wall email sign-in failed:', error);
+                const isInvalidCredentials = error.code === 'invalid_credentials'
+                    || error.message === 'Invalid login credentials';
+                setWallStatus(isInvalidCredentials ? wallText('invalidLogin') : error.message, true);
+            } finally {
+                submitButton.disabled = false;
+            }
+        });
+
+        wallPasswordRecovery.addEventListener('submit', async event => {
+            event.preventDefault();
+            const password = document.getElementById('wallNewPassword').value;
+            const confirmation = document.getElementById('wallConfirmPassword').value;
+            if (password !== confirmation) {
+                setWallStatus(wallText('passwordMismatch'), true);
+                return;
+            }
+            const submitButton = wallPasswordRecovery.querySelector('button[type="submit"]');
+            submitButton.disabled = true;
+            try {
+                const { data, error } = await supabase.auth.updateUser({ password });
+                if (error) throw error;
+                isPasswordRecovery = false;
+                wallPasswordRecovery.reset();
+                wallPasswordRecovery.classList.add('hidden');
+                updateWallAuth(data.user);
+                setWallStatus(wallText('passwordUpdated'));
+            } catch (error) {
+                console.error('Community Wall password update failed:', error);
+                setWallStatus(error.message, true);
+            } finally {
+                submitButton.disabled = false;
+            }
+        });
+
+        signUpForm.addEventListener('submit', async event => {
+            event.preventDefault();
+            const submitButton = signUpForm.querySelector('button[type="submit"]');
+            submitButton.disabled = true;
+            try {
+                const { data, error } = await supabase.auth.signUp({
+                    email: document.getElementById('signUpEmail').value.trim().toLowerCase(),
+                    password: document.getElementById('signUpPassword').value,
+                    options: {
+                        data: { full_name: document.getElementById('signUpName').value.trim() }
+                    }
+                });
+                if (error) throw error;
+                if (!data.session) {
+                    setWallStatus(wallText('signupCheckEmail'));
+                    signUpForm.reset();
+                }
+            } catch (error) {
+                console.error('Email account signup failed:', error);
+                setWallStatus(error.message, true);
+            } finally {
+                submitButton.disabled = false;
+            }
+        });
+
+        document.getElementById('wallSignOut').addEventListener('click', async () => {
+            const { error } = await supabase.auth.signOut();
+            if (error) {
+                setWallStatus(error.message, true);
+            }
+        });
+
+        document.getElementById('wallPostForm').addEventListener('submit', async event => {
+            event.preventDefault();
+            if (!wallUser) {
+                setWallStatus(wallText('signInToPost'), true);
+                return;
+            }
+            const submitButton = document.getElementById('wallPostSubmit');
+            submitButton.disabled = true;
+            const { error } = await supabase.from('community_posts').insert({
+                author_id: wallUser.id,
+                author_name: wallUser.user_metadata?.full_name || wallUser.email,
+                body: document.getElementById('wallPostBody').value.trim()
+            });
+            submitButton.disabled = false;
+            if (error) {
+                setWallStatus(wallErrorText(error), true);
+                return;
+            }
+            document.getElementById('wallPostForm').reset();
+            await loadWallPosts();
+        });
+
+        supabase.auth.onAuthStateChange((event, session) => {
+            if (event === 'INITIAL_SESSION') return;
+            updateWallAuth(session?.user || null);
+            if (event === 'PASSWORD_RECOVERY') {
+                isPasswordRecovery = true;
+            }
+            if (isPasswordRecovery) {
+                wallSignedIn.classList.add('hidden');
+                wallPasswordRecovery.classList.remove('hidden');
+            } else if (event === 'SIGNED_OUT') {
+                wallPasswordRecovery.classList.add('hidden');
+            }
+            if (event === 'PASSWORD_RECOVERY') {
+                document.getElementById('wallNewPassword').focus();
+            }
+            loadWallPosts();
+        });
+
+        try {
+            const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+            if (sessionError) throw sessionError;
+            updateWallAuth(session?.user || null);
+            await loadWallPosts();
+        } catch (error) {
+            console.error('Initializing the Community Wall failed:', error);
+            setWallStatus(wallErrorText(error), true);
+        }
+    </script>
+</body>
+</html>
